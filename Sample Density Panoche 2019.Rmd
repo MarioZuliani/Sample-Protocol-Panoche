@@ -30,17 +30,8 @@ summary(Panoche)
 ```{r}
 summary(Sites)
 ```
-###Sites Map in Panoche
-```{r}
-psites <- leaflet(Sites)%>%
-  addTiles()%>%
-  addCircles(lng = ~lng, lat = ~lat, weight = 1, radius = 20, popup = ~Site.Name)
-psites
-```
 
-```{r}
 
-```
 ###Visuals showing number of Shrubs per site in Panoche
 ```{r}
 sitedensity <- Panoche$Site.ID
