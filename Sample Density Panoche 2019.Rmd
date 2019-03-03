@@ -117,7 +117,8 @@ Panoche %>% as.data.frame %>%
   ggtitle("Longest side of shrub measurment") + coord_equal() + theme_bw() +
   xlab("Stie ID") + ylab("x measurement (cm)") + theme_classic()
 ```
+
+####Below still working on
 ```{r}
 coordinates(Panoche) <- ~lat+lng
 ```
-
