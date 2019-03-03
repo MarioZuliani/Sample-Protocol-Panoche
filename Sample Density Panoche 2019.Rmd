@@ -10,6 +10,7 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 library(leaflet)
+library(sp)
 ```
 
 ```{r}
@@ -30,6 +31,7 @@ summary(Panoche)
 ```{r}
 summary(Sites)
 ```
+
 ###Sites Map in Panoche
 ```{r}
 psites <- leaflet(Sites)%>%
@@ -42,15 +44,17 @@ psites
 ```{r}
 sitedensity <- Panoche$Site.ID
 ggplot(data=Panoche, aes(Panoche$Site.ID)) +
-  geom_histogram()
+  geom_histogram() + ylab("Shrub Count") + xlab("SiteID") +
+  ggtitle("Total Shrub count at each Panoche Site") +theme_classic()
 ```
 ```{r}
 ggplot(data = Panoche, aes(Site.ID, Shrub.ID)) +
-  geom_point()
+  geom_point() + xlab("Site ID") + ylab("Shrub ID") +
+  ggtitle("Number of Shrubs per Site") +theme_classic()
 ```
 ```{r}
 ggplot(data = Panoche, aes(sitedensity, Site.ID)) +
-  geom_boxplot()
+  geom_boxplot() + xlab("site Density") + ylab("Site ID") + theme_classic()
 ```
 
 ###Correlation of site to X, Y, and Z measurements
@@ -100,3 +104,20 @@ sd(Mojave$x..m.)
 sd(Mojave$y..m.)
 sd(Mojave$z..m.)
 ```
+
+```{r}
+Panoche %>% as.data.frame %>% 
+  ggplot(aes(lat, lng)) + geom_point(aes(), color="blue", alpha=3/4) + 
+  ggtitle("Site locations") + coord_equal() + theme_bw() +
+  xlab("Latitude") + ylab("Longitude") + theme_classic()
+```
+```{r}
+Panoche %>% as.data.frame %>% 
+  ggplot(aes(Site.ID, x..m.)) + geom_point(aes(), color="blue", alpha=3/4) + 
+  ggtitle("Longest side of shrub measurment") + coord_equal() + theme_bw() +
+  xlab("Stie ID") + ylab("x measurement (cm)") + theme_classic()
+```
+```{r}
+coordinates(Panoche) <- ~lat+lng
+```
+
