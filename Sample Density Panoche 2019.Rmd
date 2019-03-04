@@ -118,7 +118,7 @@ Panoche %>% as.data.frame %>%
   xlab("Stie ID") + ylab("x measurement (cm)") + theme_classic()
 ```
 
-####Below still working on
+####Below still working on!
 ```{r}
 coordinates(Panoche) <- ~lat+lng
 ```
